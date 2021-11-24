@@ -33,7 +33,6 @@ class BerlinClock {
         return $this->secondes % 2 == 0;
     }
 
-
     public static function createClockLine(string $mainSpacer, string $spacerBetweenIcons, int $nbIconActif, int $nbIconMax) : string {
         $line = "";
         $reste = $nbIconMax - $nbIconActif;
@@ -43,6 +42,23 @@ class BerlinClock {
         for ($i = 1; $i <= $reste; $i++) {
             $line .= "▯" . $spacerBetweenIcons;
         }
-        return $mainSpacer . rtrim($line);
+        return $mainSpacer . rtrim($line) . "\n";
+    }
+
+    public function horloge() : string {
+        /*
+                ▯
+         ▮   ▯   ▯   ▯
+         ▮   ▮   ▯   ▯
+        ▮▮▮▮▮▮▯▯▯▯▯
+         ▮   ▮   ▮   ▯
+        */
+
+        $seconds = $this->createClockLine("         ", "", $this->getSeconds(), 1);
+        $fiveHour = $this->createClockLine("  ", "   ", $this->getFiveHours(), 4);
+        $simpleHour = $this->createClockLine("  ", "   ", $this->getSimpleHours(), 4);
+        $fiveMinutes = $this->createClockLine(" ", "", $this->getFiveMinutes(), 11);
+        $simpleMinute = $this->createClockLine("  ", "   ", $this->getSimpleMinutes(), 4);
+        return $seconds . $fiveHour . $simpleHour . $fiveMinutes . $simpleMinute;
     }
 }
