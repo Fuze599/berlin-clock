@@ -47,7 +47,6 @@ class BerlinClockTest extends TestCase {
         self::assertEquals(11, $response);
     }
 
-
     // Tests getSimpleHours()
     public function testGetSimpleHoursShouldReturn0() {
         $berlinClock = new BerlinClock(1, 1, 5);
@@ -66,4 +65,25 @@ class BerlinClockTest extends TestCase {
         $response = $berlinClock->getSimpleHours();
         self::assertEquals(3, $response);
     }
+
+    // Tests getFiveHours()
+    public function testGetFiveHoursShouldReturn0() {
+        $berlinClock = new BerlinClock(1, 1, 4);
+        $response = $berlinClock->getFiveHours();
+        self::assertEquals(0, $response);
+    }
+
+    public function testGetFiveHoursShouldReturn1() {
+        $berlinClock = new BerlinClock(1, 1, 5);
+        $response = $berlinClock->getFiveHours();
+        self::assertEquals(1, $response);
+    }
+
+    public function testGetFiveHoursShouldReturn3() {
+        $berlinClock = new BerlinClock(1, 1, 23);
+        $response = $berlinClock->getFiveHours();
+        self::assertEquals(4, $response);
+    }
+
+
 }
