@@ -45,45 +45,45 @@ class BerlinClockTest extends TestCase {
 
     // Tests getSimpleHours()
     public function testGetSimpleHoursShouldReturn0() {
-        $berlinClock = new BerlinClock(1, 1, 5);
+        $berlinClock = new BerlinClock(5, 1, 1);
         $response = $berlinClock->getSimpleHours();
         self::assertEquals(0, $response);
     }
 
     public function testGetSimpleHoursShouldReturn1() {
-        $berlinClock = new BerlinClock(1, 1, 6);
+        $berlinClock = new BerlinClock(1, 1, 1);
         $response = $berlinClock->getSimpleHours();
         self::assertEquals(1, $response);
     }
 
     public function testGetSimpleHoursShouldReturn3() {
-        $berlinClock = new BerlinClock(1, 1, 23);
+        $berlinClock = new BerlinClock(23, 1, 1);
         $response = $berlinClock->getSimpleHours();
         self::assertEquals(3, $response);
     }
 
     // Tests getFiveHours()
     public function testGetFiveHoursShouldReturn0() {
-        $berlinClock = new BerlinClock(1, 1, 4);
+        $berlinClock = new BerlinClock(1, 1, 1);
         $response = $berlinClock->getFiveHours();
         self::assertEquals(0, $response);
     }
 
     public function testGetFiveHoursShouldReturn1() {
-        $berlinClock = new BerlinClock(1, 1, 5);
+        $berlinClock = new BerlinClock(5, 1, 1);
         $response = $berlinClock->getFiveHours();
         self::assertEquals(1, $response);
     }
 
     public function testGetFiveHoursShouldReturn4() {
-        $berlinClock = new BerlinClock(1, 1, 23);
+        $berlinClock = new BerlinClock(21, 1, 1);
         $response = $berlinClock->getFiveHours();
         self::assertEquals(4, $response);
     }
 
     // Tests getSeconds()
     public function testGetSecondsShouldReturnTrue() {
-        $berlinClock = new BerlinClock(0, 1, 1);
+        $berlinClock = new BerlinClock(1, 1, 0);
         $response = $berlinClock->getSeconds();
         self::assertTrue($response);
     }
@@ -95,9 +95,30 @@ class BerlinClockTest extends TestCase {
     }
 
     public function testGetSecondsShouldReturnTrueBis() {
-        $berlinClock = new BerlinClock(56, 1, 1);
+        $berlinClock = new BerlinClock(1, 1, 26);
         $response = $berlinClock->getSeconds();
         self::assertTrue($response);
+    }
+
+    // Tests createClockLine()
+    public function testCreateClockLine1() {
+        $response = BerlinClock::createClockLine(" ", "   ", 4, 6);
+        self::assertEquals($response, " ▮   ▮   ▮   ▮   ▯   ▯");
+    }
+
+    public function testCreateClockLine2() {
+        $response = BerlinClock::createClockLine("    ", "  ", 10, 15);
+        self::assertEquals($response, "    ▮  ▮  ▮  ▮  ▮  ▮  ▮  ▮  ▮  ▮  ▯  ▯  ▯  ▯  ▯");
+    }
+
+    public function testCreateClockLine3() {
+        $response = BerlinClock::createClockLine("         ", "", true, 1);
+        self::assertEquals($response, "         ▮");
+    }
+
+    public function testCreateClockLine4() {
+        $response = BerlinClock::createClockLine("         ", "", false, 1);
+        self::assertEquals($response, "         ▯");
     }
 
 

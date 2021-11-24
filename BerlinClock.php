@@ -4,13 +4,13 @@ class BerlinClock {
     private int $minutes;
     private int $heures;
 
-    public function __construct($secondes, $minutes, $heures) {
+    public function __construct($heures, $minutes, $secondes) {
         if ($secondes >= 60 or $minutes >= 60 or $heures >= 24)
             throw new InvalidArgumentException();
 
-        $this->secondes = $secondes;
-        $this->minutes = $minutes;
         $this->heures = $heures;
+        $this->minutes = $minutes;
+        $this->secondes = $secondes;
     }
 
     public function getSimpleMinutes() : int {
@@ -33,7 +33,16 @@ class BerlinClock {
         return $this->secondes % 2 == 0;
     }
 
-    public function horloge() : string {
-        return "";
+
+    public static function createClockLine(string $mainSpacer, string $spacerBetweenIcons, int $nbIconActif, int $nbIconMax) : string {
+        $line = "";
+        $reste = $nbIconMax - $nbIconActif;
+        for ($i = 1; $i <= $nbIconActif; $i++) {
+            $line .= "▮" . $spacerBetweenIcons;
+        }
+        for ($i = 1; $i <= $reste; $i++) {
+            $line .= "▯" . $spacerBetweenIcons;
+        }
+        return $mainSpacer . rtrim($line);
     }
 }
