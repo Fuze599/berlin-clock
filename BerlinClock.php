@@ -29,8 +29,8 @@ class BerlinClock {
         return ($this->heures - $this->getSimpleHours()) / 5;
     }
 
-    public function getSeconds() : int {
-        return 0;
+    public function getSeconds(): bool {
+        return $this->secondes % 2 == 0;
     }
 
     public function horloge() : string {

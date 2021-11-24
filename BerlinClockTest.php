@@ -5,10 +5,6 @@ require_once('BerlinClock.php');
 class BerlinClockTest extends TestCase {
     private BerlinClock $berlinClock;
 
-    protected function setUp(): void {
-        parent::setUp();
-    }
-
     // Tests getSimpleMinutes()
     public function testGetSimpleMinutesShouldReturn0() {
         $berlinClock = new BerlinClock(1, 5, 1);
@@ -79,10 +75,29 @@ class BerlinClockTest extends TestCase {
         self::assertEquals(1, $response);
     }
 
-    public function testGetFiveHoursShouldReturn3() {
+    public function testGetFiveHoursShouldReturn4() {
         $berlinClock = new BerlinClock(1, 1, 23);
         $response = $berlinClock->getFiveHours();
         self::assertEquals(4, $response);
+    }
+
+    // Tests getSeconds()
+    public function testGetSecondsShouldReturnTrue() {
+        $berlinClock = new BerlinClock(0, 1, 1);
+        $response = $berlinClock->getSeconds();
+        self::assertTrue($response);
+    }
+
+    public function testGetSecondsShouldReturnFalse() {
+        $berlinClock = new BerlinClock(1, 1, 1);
+        $response = $berlinClock->getSeconds();
+        self::assertFalse($response);
+    }
+
+    public function testGetSecondsShouldReturnTrueBis() {
+        $berlinClock = new BerlinClock(56, 1, 1);
+        $response = $berlinClock->getSeconds();
+        self::assertTrue($response);
     }
 
 
