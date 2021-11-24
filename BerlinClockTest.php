@@ -9,69 +9,61 @@ class BerlinClockTest extends TestCase {
         parent::setUp();
     }
 
+    // Tests getSimpleMinutes()
     public function testGetSimpleMinutesShouldReturn0() {
-        // Arrange
         $berlinClock = new BerlinClock(1, 5, 1);
-
-        // Act
         $response = $berlinClock->getSimpleMinutes();
-
-        // Assert
         self::assertEquals(0, $response);
     }
 
     public function testGetSimpleMinutesShouldReturn1() {
-        // Arrange
         $berlinClock = new BerlinClock(1, 1, 1);
-
-        // Act
         $response = $berlinClock->getSimpleMinutes();
-
-        // Assert
         self::assertEquals(1, $response);
     }
 
     public function testGetSimpleMinutesShouldReturn1Bis() {
-        // Arrange
         $berlinClock = new BerlinClock(1, 6, 1);
-
-        // Act
         $response = $berlinClock->getSimpleMinutes();
-
-        // Assert
         self::assertEquals(1, $response);
     }
 
+    // Tests getFiveMinutes()
     public function testGetFiveMinutesShouldReturn0() {
-        // Arrange
         $berlinClock = new BerlinClock(1, 4, 1);
-
-        // Act
         $response = $berlinClock->getFiveMinutes();
-
-        // Assert
         self::assertEquals(0, $response);
     }
 
     public function testGetFiveMinutesShouldReturn4() {
-        // Arrange
         $berlinClock = new BerlinClock(1, 24, 1);
-
-        // Act
         $response = $berlinClock->getFiveMinutes();
-
-        // Assert
         self::assertEquals(4, $response);
     }
 
     public function testGetFiveMinutesShouldReturn11() {
-        // Arrange
         $berlinClock = new BerlinClock(1, 56, 1);
-
-        // Act
         $response = $berlinClock->getFiveMinutes();
-
-        // Assert
         self::assertEquals(11, $response);
+    }
+
+
+    // Tests getSimpleHours()
+    public function testGetSimpleHoursShouldReturn0() {
+        $berlinClock = new BerlinClock(1, 1, 5);
+        $response = $berlinClock->getSimpleHours();
+        self::assertEquals(0, $response);
+    }
+
+    public function testGetSimpleHoursShouldReturn1() {
+        $berlinClock = new BerlinClock(1, 1, 6);
+        $response = $berlinClock->getSimpleHours();
+        self::assertEquals(1, $response);
+    }
+
+    public function testGetSimpleHoursShouldReturn3() {
+        $berlinClock = new BerlinClock(1, 1, 23);
+        $response = $berlinClock->getSimpleHours();
+        self::assertEquals(3, $response);
     }
 }

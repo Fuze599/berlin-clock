@@ -22,7 +22,7 @@ class BerlinClock {
     }
 
     public function getSimpleHours() : int {
-        return 0;
+        return $this->heures % 5;
     }
 
     public function getFiveHours() : int {
