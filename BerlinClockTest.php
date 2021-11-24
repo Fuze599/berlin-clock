@@ -41,4 +41,37 @@ class BerlinClockTest extends TestCase {
         // Assert
         self::assertEquals(1, $response);
     }
+
+    public function testGetFiveMinutesShouldReturn0() {
+        // Arrange
+        $berlinClock = new BerlinClock(1, 4, 1);
+
+        // Act
+        $response = $berlinClock->getFiveMinutes();
+
+        // Assert
+        self::assertEquals(0, $response);
+    }
+
+    public function testGetFiveMinutesShouldReturn4() {
+        // Arrange
+        $berlinClock = new BerlinClock(1, 24, 1);
+
+        // Act
+        $response = $berlinClock->getFiveMinutes();
+
+        // Assert
+        self::assertEquals(4, $response);
+    }
+
+    public function testGetFiveMinutesShouldReturn11() {
+        // Arrange
+        $berlinClock = new BerlinClock(1, 56, 1);
+
+        // Act
+        $response = $berlinClock->getFiveMinutes();
+
+        // Assert
+        self::assertEquals(11, $response);
+    }
 }
