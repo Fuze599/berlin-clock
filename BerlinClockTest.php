@@ -103,23 +103,84 @@ class BerlinClockTest extends TestCase {
     // Tests createClockLine()
     public function testCreateClockLine1() {
         $response = BerlinClock::createClockLine(" ", "   ", 4, 6);
-        self::assertEquals($response, " ▮   ▮   ▮   ▮   ▯   ▯");
+        self::assertEquals($response, " ▮   ▮   ▮   ▮   ▯   ▯\n");
     }
 
     public function testCreateClockLine2() {
         $response = BerlinClock::createClockLine("    ", "  ", 10, 15);
-        self::assertEquals($response, "    ▮  ▮  ▮  ▮  ▮  ▮  ▮  ▮  ▮  ▮  ▯  ▯  ▯  ▯  ▯");
+        self::assertEquals($response, "    ▮  ▮  ▮  ▮  ▮  ▮  ▮  ▮  ▮  ▮  ▯  ▯  ▯  ▯  ▯\n");
     }
 
     public function testCreateClockLine3() {
         $response = BerlinClock::createClockLine("         ", "", true, 1);
-        self::assertEquals($response, "         ▮");
+        self::assertEquals($response, "         ▮\n");
     }
 
     public function testCreateClockLine4() {
         $response = BerlinClock::createClockLine("         ", "", false, 1);
-        self::assertEquals($response, "         ▯");
+        self::assertEquals($response, "         ▯\n");
     }
 
+    // Tests horloge()
+    public function testHorloge1() {
+        $berlinClock = new BerlinClock(1, 1, 26);
+        $response = $berlinClock->horloge();
+        $expected =
+                "         ▮\n" .
+                "  ▯   ▯   ▯   ▯\n" .
+                "  ▮   ▯   ▯   ▯\n" .
+                " ▯▯▯▯▯▯▯▯▯▯▯\n" .
+                "  ▮   ▯   ▯   ▯\n";
+        self::assertEquals($expected, $response);
+    }
+
+    public function testHorloge2() {
+        $berlinClock = new BerlinClock(19, 21, 51);
+        $response = $berlinClock->horloge();
+        $expected =
+            "         ▯\n" .
+            "  ▮   ▮   ▮   ▯\n" .
+            "  ▮   ▮   ▮   ▮\n" .
+            " ▮▮▮▮▯▯▯▯▯▯▯\n" .
+            "  ▮   ▯   ▯   ▯\n";
+        self::assertEquals($expected, $response);
+    }
+
+    public function testHorloge3() {
+        $berlinClock = new BerlinClock(15, 37, 36);
+        $response = $berlinClock->horloge();
+        $expected =
+            "         ▮\n" .
+            "  ▮   ▮   ▮   ▯\n" .
+            "  ▯   ▯   ▯   ▯\n" .
+            " ▮▮▮▮▮▮▮▯▯▯▯\n" .
+            "  ▮   ▮   ▯   ▯\n";
+        self::assertEquals($expected, $response);
+    }
+
+
+    public function testHorloge4() {
+        $berlinClock = new BerlinClock(7, 15, 55);
+        $response = $berlinClock->horloge();
+        $expected =
+            "         ▯\n" .
+            "  ▮   ▯   ▯   ▯\n" .
+            "  ▮   ▮   ▯   ▯\n" .
+            " ▮▮▮▯▯▯▯▯▯▯▯\n" .
+            "  ▯   ▯   ▯   ▯\n";
+        self::assertEquals($expected, $response);
+    }
+
+    public function testHorloge5() {
+        $berlinClock = new BerlinClock(0, 0, 1);
+        $response = $berlinClock->horloge();
+        $expected =
+            "         ▯\n" .
+            "  ▯   ▯   ▯   ▯\n" .
+            "  ▯   ▯   ▯   ▯\n" .
+            " ▯▯▯▯▯▯▯▯▯▯▯\n" .
+            "  ▯   ▯   ▯   ▯\n";
+        self::assertEquals($expected, $response);
+    }
 
 }
