@@ -5,7 +5,7 @@ class BerlinClock {
     private int $heures;
 
     public function __construct($heures, $minutes, $secondes) {
-        if ($secondes >= 60 or $minutes >= 60 or $heures >= 24)
+        if ($secondes >= 60 or $secondes < 0 or $minutes >= 60 or $minutes < 0  or $heures >= 24 or $heures < 0)
             throw new InvalidArgumentException();
 
         $this->heures = $heures;

@@ -3,7 +3,25 @@ use PHPUnit\Framework\TestCase;
 require_once('BerlinClock.php');
 
 class BerlinClockTest extends TestCase {
-    private BerlinClock $berlinClock;
+
+    // Tests __construct()
+    public function testConstructorShouldThrowAnErrorTooMuchHour() {
+        self::expectException(InvalidArgumentException::class);
+        $berlinClock = new BerlinClock(24, 5, 1);
+
+    }
+
+    public function testConstructorShouldThrowAnErrorTooMuchMinutes() {
+        self::expectException(InvalidArgumentException::class);
+        $berlinClock = new BerlinClock(23, 60, 1);
+
+    }
+
+    public function testConstructorShouldThrowAnErrorNegativeValue() {
+        self::expectException(InvalidArgumentException::class);
+        $berlinClock = new BerlinClock(23, -1, 1);
+
+    }
 
     // Tests getSimpleMinutes()
     public function testGetSimpleMinutesShouldReturn0() {
